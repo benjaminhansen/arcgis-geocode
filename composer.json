@@ -1,0 +1,23 @@
+{
+    "name": "benjaminhansen/arcgis-geocode",
+    "description": "A PHP library for interacting with the ArcGIS Geocode API.",
+    "keywords":["arcgis", "geocode", "arc", "gis", "api"],
+    "type": "library",
+    "license": "MIT",
+    "homepage":"https://github.com/benjaminhansen/arcgis-geocode",
+    "authors": [
+        {
+            "name": "BJ Hansen",
+            "email": "bjhansen@benjaminhansen.net"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.8",
+        "laravel/helpers": "^1.7"
+    },
+    "autoload": {
+      "psr-4": {
+        "BenjaminHansen\\ArcGIS\\Geocode\\": "src/"
+      }
+    }
+}
