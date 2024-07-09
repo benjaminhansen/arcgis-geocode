@@ -14,4 +14,9 @@ class BaseModel
             $this->$key = $value;
         }
     }
+
+    public function __call($method, $args = [])
+    {
+        return $this?->$method ?? null;
+    }
 }

@@ -2,11 +2,11 @@
 
 namespace BenjaminHansen\ArcGIS\Geocode\Api;
 
-use BenjaminHansen\ArcGIS\Geocode\Models\GeocodeRecord;
-use BenjaminHansen\ArcGIS\Geocode\Traits\ApiBase;
 use GuzzleHttp\Client as HttpClient;
 use Illuminate\Support\Collection;
-use Exception;
+use BenjaminHansen\ArcGIS\Geocode\Models\GeocodeRecord;
+use BenjaminHansen\ArcGIS\Geocode\Traits\ApiBase;
+use BenjaminHansen\ArcGIS\Geocode\Exceptions\InvalidRequestException;
 
 class GeocodeAddresses
 {
@@ -108,7 +108,7 @@ class GeocodeAddresses
     public function get(): Collection
     {
         if(!isset($this->url_parameters['token'])) {
-            throw new Exception("[token] is required for this API operation!");
+            throw new InvalidRequestException("[token] is required for this API operation!");
         }
 
         $url_parameter_string = http_build_query($this->url_parameters);

@@ -24,19 +24,21 @@ $suggest_request->labelsAsPostalCity()->text('1600 Pennsylvania Ave. SE, Washing
 $suggestion = $suggest_request->first();
 
 // or get all suggestions returned
-// $suggestions = $suggest_request->get();
+// $suggestions = $suggest_request->all();
 
 // use a suggestion to look up coordinates, etc
-$candidates_request = new FindAddressCandidates($suggestion);
+$all_candidates = $suggestion->candidates()->all();
+$first_candidate = $suggestion->candidates()->first();
+$last_candidate = $suggestion->candidates()->last();
 
 // or you can provide the text and magicKey values directly
 // $candidates_request = new FindAddressCandidates($suggestion->text, $suggestion->magicKey);
 
 // get the first candidate returned
-$candidate = $candidates_request->first();
+// $candidate = $candidates_request->first();
 
 // get the lat/lon values from the returned object
-$latitude = $candidate->latitude();
-$longitude = $candidate->longitude();
+$latitude = $first_candidate->latitude();
+$longitude = $first_candidate->longitude();
 
 ```

@@ -3,9 +3,10 @@
 namespace BenjaminHansen\ArcGIS\Geocode\Api;
 
 use GuzzleHttp\Client as HttpClient;
+use Illuminate\Support\Collection;
+use BenjaminHansen\ArcGIS\Geocode\Models\Candidate;
 use BenjaminHansen\ArcGIS\Geocode\Models\Suggestion;
 use BenjaminHansen\ArcGIS\Geocode\Traits\ApiBase;
-use Illuminate\Support\Collection;
 
 class Suggest
 {
@@ -104,15 +105,15 @@ class Suggest
 
     public function first(): Suggestion
     {
-        return $this->get()->first();
+        return $this->all()->first();
     }
 
     public function last(): Suggestion
     {
-        return $this->get()->last();
+        return $this->all()->last();
     }
 
-    public function get(): Collection
+    public function all(): Collection
     {
         $url_parameter_string = http_build_query($this->url_parameters);
         $base_url = $this->getBaseUrl();
@@ -124,6 +125,23 @@ class Suggest
 
         foreach($data?->suggestions ?? [] as $suggestion) {
             $return[] = new Suggestion($suggestion);
+        }
+
+        return collect($return);
+    }
+
+    public function firstCandidate(): Candidate
+    {
+        $candidates_request = new FindAddressCandidates($this->first());
+        return $candidates_request->first();
+    }
+
+    public function candidates(): Collection
+    {
+        $return = [];
+
+        foreach($this->all() as $suggestion) {
+            $return[] = (new FindAddressCandidates($suggestion))->first();
         }
 
         return collect($return);
