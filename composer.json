@@ -19,5 +19,8 @@
       "psr-4": {
         "BenjaminHansen\\ArcGIS\\Geocode\\": "src/"
       }
+    },
+    "require-dev": {
+        "laravel/pint": "^1.21"
     }
 }

@@ -4,13 +4,25 @@ namespace BenjaminHansen\ArcGIS\Geocode\Models;
 
 class Candidate extends BaseModel
 {
-    public function latitude(): float|null
+    public function latitude(?float $precision = null): ?float
     {
-        return $this?->location?->y ?? null;
+        $latitude = $this?->location?->y ?? null;
+
+        if($precision && $latitude) {
+            return round($latitude, $precision);
+        }
+
+        return $latitude;
     }
 
-    public function longitude(): float|null
+    public function longitude(?float $precision = null): ?float
     {
-        return $this?->location?->x ?? null;
+        $longitude = $this?->location?->x ?? null;
+
+        if($precision && $longitude) {
+            return round($longitude, $precision);
+        }
+
+        return $longitude;
     }
 }

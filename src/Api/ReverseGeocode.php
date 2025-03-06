@@ -2,9 +2,9 @@
 
 namespace BenjaminHansen\ArcGIS\Geocode\Api;
 
-use GuzzleHttp\Client as HttpClient;
 use BenjaminHansen\ArcGIS\Geocode\Models\ReverseRecord;
 use BenjaminHansen\ArcGIS\Geocode\Traits\ApiBase;
+use GuzzleHttp\Client as HttpClient;
 
 class ReverseGeocode
 {
@@ -13,11 +13,11 @@ class ReverseGeocode
     public function __construct()
     {
         $this->http_client = new HttpClient([
-            'http_errors' => false
+            'http_errors' => false,
         ]);
 
         // set the base URL for all requests on this class
-        $this->setBaseUrl("https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode");
+        $this->setBaseUrl('https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode');
 
         // default to json format
         $this->asJson();
@@ -26,6 +26,7 @@ class ReverseGeocode
     public function location(float $x, float $y): self
     {
         $this->url_parameters['location'] = "{$x},{$y}";
+
         return $this;
     }
 
