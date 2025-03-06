@@ -152,4 +152,20 @@ class Suggest
 
         return collect($candidates);
     }
+
+    public function latitude(?float $precision = null): ?float
+    {
+        // return the latitude of the first candidate, if it exists
+        $candidate = $this->candidates()->first();
+
+        return $candidate?->latitude($precision);
+    }
+
+    public function longitude(?float $precision = null): ?float
+    {
+        // return the longitude of the first candidate, if it exists
+        $candidate = $this->candidates()->first();
+
+        return $candidate?->longitude($precision);
+    }
 }
