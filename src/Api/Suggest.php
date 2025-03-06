@@ -12,7 +12,7 @@ class Suggest
 {
     use ApiBase;
 
-    public function __construct()
+    public function __construct(?string $text = null)
     {
         $this->http_client = new HttpClient([
             'http_errors' => false,
@@ -29,6 +29,11 @@ class Suggest
 
         // default to USA
         $this->asUSA();
+
+        // if a search text was provided, set it
+        if ($text) {
+            $this->text($text);
+        }
     }
 
     public function asUSA(): self
