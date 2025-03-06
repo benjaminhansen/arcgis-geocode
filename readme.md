@@ -17,7 +17,7 @@ use BenjaminHansen\ArcGIS\Geocode\Api\Suggest;
 
 // make a request for suggestions based on the text provided
 $api = new Suggest();
-$$api->labelsAsPostalCity()
+$api->labelsAsPostalCity()
     ->text('1600 Pennsylvania Ave. SE, Washington, DC 20003');
 
 // get the latitude and longitude of the first suggestion returned
