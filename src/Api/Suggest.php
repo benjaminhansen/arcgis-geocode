@@ -147,7 +147,7 @@ class Suggest
         return collect($return);
     }
 
-    public function candidates(): Collection
+    public function candidates(?int $i = null): Collection|Candidate
     {
         $candidates = [];
 
@@ -155,27 +155,31 @@ class Suggest
             $candidates[] = (new FindAddressCandidates($suggestion))->first();
         }
 
+        if ($i) {
+            return collect($candidates)->get($i);
+        }
+
         return collect($candidates);
     }
 
-    public function latitude(?float $precision = null): ?float
+    public function latitude(?float $precision = null, int $i = 0): ?float
     {
         // return the latitude of the first candidate, if it exists
-        $candidate = $this->candidates()->first();
+        $candidate = $this->candidates($i)?->first();
 
         return $candidate?->latitude($precision);
     }
 
-    public function longitude(?float $precision = null): ?float
+    public function longitude(?float $precision = null, int $i = 0): ?float
     {
         // return the longitude of the first candidate, if it exists
-        $candidate = $this->candidates()->first();
+        $candidate = $this->candidates($i)?->first();
 
         return $candidate?->longitude($precision);
     }
 
-    public function address(): ?string
+    public function address(int $i = 0): ?string
     {
-        return $this->first()?->text;
+        return $this->all()->get($i)?->text;
     }
 }

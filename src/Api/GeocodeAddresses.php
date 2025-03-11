@@ -121,7 +121,7 @@ class GeocodeAddresses
     public function get(): Collection
     {
         if (! isset($this->url_parameters['token'])) {
-            throw new InvalidRequestException('[token] is required for this API operation!');
+            throw new InvalidRequestException('The [token] request parameter is required for this API operation!');
         }
 
         $url_parameter_string = http_build_query($this->url_parameters);

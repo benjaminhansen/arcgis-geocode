@@ -10,7 +10,7 @@ class ReverseGeocode
 {
     use ApiBase;
 
-    public function __construct()
+    public function __construct(?float $lat = null, ?float $lon = null)
     {
         $this->http_client = new HttpClient([
             'http_errors' => false,
@@ -21,11 +21,16 @@ class ReverseGeocode
 
         // default to json format
         $this->asJson();
+
+        // if we have a lat and lon, set them
+        if ($lat && $lon) {
+            $this->location($lat, $lon);
+        }
     }
 
-    public function location(float $x, float $y): self
+    public function location(float $lat, float $lon): self
     {
-        $this->url_parameters['location'] = "{$x},{$y}";
+        $this->url_parameters['location'] = "{$lon},{$lat}";
 
         return $this;
     }
