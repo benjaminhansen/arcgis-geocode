@@ -8,7 +8,7 @@ class Candidate extends BaseModel
     {
         $latitude = $this?->location?->y ?? null;
 
-        if($precision && $latitude) {
+        if ($precision && $latitude) {
             return round($latitude, $precision);
         }
 
@@ -19,7 +19,7 @@ class Candidate extends BaseModel
     {
         $longitude = $this?->location?->x ?? null;
 
-        if($precision && $longitude) {
+        if ($precision && $longitude) {
             return round($longitude, $precision);
         }
 

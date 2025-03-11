@@ -120,14 +120,14 @@ class Suggest
         return $this;
     }
 
-    public function first(): Suggestion
+    public function first(): ?Suggestion
     {
-        return $this->all()->first();
+        return $this->all()?->first();
     }
 
-    public function last(): Suggestion
+    public function last(): ?Suggestion
     {
-        return $this->all()->last();
+        return $this->all()?->last();
     }
 
     public function all(): Collection
@@ -172,5 +172,10 @@ class Suggest
         $candidate = $this->candidates()->first();
 
         return $candidate?->longitude($precision);
+    }
+
+    public function address(): ?string
+    {
+        return $this->first()?->text;
     }
 }
