@@ -130,7 +130,7 @@ class Suggest
         return $this->all()?->last();
     }
 
-    public function all(): Collection
+    public function all(bool $serialize = false): Collection
     {
         $url_parameter_string = http_build_query($this->url_parameters);
         $base_url = $this->getBaseUrl();
@@ -141,7 +141,13 @@ class Suggest
         $return = [];
 
         foreach ($data?->suggestions ?? [] as $suggestion) {
-            $return[] = new Suggestion($suggestion);
+            $suggest = new Suggestion($suggestion);
+
+            if($serialize) {
+                $suggest = $suggest->serialize();
+            }
+
+            $return[] = $suggest;
         }
 
         return collect($return);

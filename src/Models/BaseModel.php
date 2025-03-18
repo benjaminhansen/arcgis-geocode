@@ -18,4 +18,9 @@ class BaseModel
     {
         return $this?->$method ?? null;
     }
+
+    public function serialize()
+    {
+        return serialize($this);
+    }
 }
